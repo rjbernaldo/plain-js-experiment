@@ -1,3 +1,4 @@
+
 var USER_MARKER_URL = '/assets/blue.png';
 
 function Map() {

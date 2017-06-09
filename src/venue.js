@@ -12,9 +12,9 @@ Venue.prototype.render = function(currentMarkerId, setCurrentMarkerId) {
         <h5 class="mb-1">${this.data.name}</h5>
         <small>${this.data.categories.map(function(c) { return c.name; }).join(', ')}</small>
       </div>
-      <p class="mb-1">${this.data.location.address}</p>
-      <small><a href=${this.data.url}>Website</a></small>
-      <small>${this.data.contact.phone}</small>
+      <p class="mb-1">${this.data.location.address || ''}</p>
+      <small><a href=${this.data.url || ''}>${ this.data.url ? 'Website' : ''}</a></small>
+      <small>${this.data.contact.phone || ''}</small>
     </div>
   `;
 
