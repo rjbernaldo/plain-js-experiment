@@ -1,9 +1,7 @@
-
+var API_KEY = 'AIzaSyChnDYKpSZIRZx5Suoj-kqHWq45v04haBM'; // TODO: dotenv
 var USER_MARKER_URL = '/assets/blue.png';
 
-function Map() {
-
-}
+function Map() {}
 
 Map.prototype.render = function() {
   this.dom = document.createElement('div');

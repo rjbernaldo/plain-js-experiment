@@ -1,6 +1,4 @@
-function Sidebar() {
-
-}
+function Sidebar() {}
 
 Sidebar.prototype.render = function() {
   this.dom = document.createElement('div');

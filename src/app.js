@@ -26,24 +26,35 @@ App.prototype.renderSidebar = function() {
 };
 
 App.prototype.renderUserDetails = function(lat, lng) {
-  this.userDetails = new UserDetails(lat, lng); // todo: setparams
+  this.userDetails = new UserDetails(lat, lng, function(params) {
+    while (this.venues.dom.firstChild) {
+      this.venues.dom.removeChild(this.venues.dom.firstChild);
+    }
+    this.venues.data.forEach(function(venue) {
+      venue.marker.setMap(null);
+    });
+
+    this.venues.fetchVenues(this.map, lat, lng, params.radius, params.limit);
+  }.bind(this));
   this.sidebar.dom.appendChild(this.userDetails.render());
 };
 
-App.prototype.renderVenues = function(lat, lng) {
+App.prototype.renderVenues = function(lat, lng, params) {
+  params = params || this.userDetails;
+
   this.venues = new Venues();
   this.sidebar.dom.appendChild(this.venues.render());
   this.venues.fetchVenues(
     this.map,
     lat,
     lng,
-    this.userDetails.radius,
-    this.userDetails.limit,
+    params.radius,
+    params.limit,
   );
 };
 
 App.prototype.attachEventListeners = function() {
-  window.addEventListener('resize', app.resize, false);
+  window.addEventListener('resize', this.resize.bind(this), false);
   this.userDetails.attachEventListeners();
 };
 

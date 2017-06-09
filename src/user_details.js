@@ -104,6 +104,6 @@ UserDetails.prototype.attachEventListeners = function() {
   }.bind(this));
 
   btn.addEventListener('click', function(e) {
-    console.log(this.lat, this.lng, this.radius, this.limit);
+    this.setParams(this);
   }.bind(this));
 };

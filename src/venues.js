@@ -1,5 +1,9 @@
 // TODO: dotenv
-
+var CLIENT_ID = 'D2RALMRPSNOPXON20GXYIHADRYDIOJCMZ45WXFP14LXLPW0M';
+var CLIENT_SECRET = '1XGQMVGAWCBDRFH3SLOCBSZMWQLKPSVWUSB1QQAP22Q1NIGX';
+var VERSION = '20170101';
+var MARKER_URL = '/assets/black.png';
+var CURRENT_MARKER_URL = '/assets/green.png';
 
 function Venues() {
   this.data = [];
@@ -44,10 +48,6 @@ Venues.prototype.setCurrentMarkerId = function(data) {
 };
 
 Venues.prototype.renderVenues = function() {
-  while (this.dom.hasChildNodes()) {
-    this.dom.removeChild(this.dom.lastChild);
-  }
-
   this.data.forEach(function(d) {
     var venue = new Venue(d);
 
