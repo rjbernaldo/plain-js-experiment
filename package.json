@@ -4,7 +4,7 @@
   "description": "Small project to play around with different APIs using plain javascript.",
   "main": "index.js",
   "scripts": {
-    "start": "http-server ./src"
+    "start": "http-server ./src -p $PORT"
   },
   "repository": {
     "type": "git",
