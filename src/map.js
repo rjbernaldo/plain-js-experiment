@@ -1,4 +1,4 @@
-var USER_MARKER_URL = '/assets/blue.png'; // TODO: dotenv
+var USER_MARKER_URL = '/assets/blue.png';
 
 function Map() {
 
@@ -11,7 +11,7 @@ Map.prototype.render = function() {
   return this.dom;
 };
 
-Map.prototype.attachGoogleMaps = function() {
+Map.prototype.attachGoogleMaps = function(lat, lng) {
   var googleMapsUrl = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`;
   var script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
@@ -19,28 +19,21 @@ Map.prototype.attachGoogleMaps = function() {
   document.head.appendChild(script);
 
   window.initMap = function() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
+    this.google = new google.maps.Map(
+      document.getElementById('map'),
+      { zoom: 17, center: { lat: lat, lng: lng }},
+    );
 
-        var map = new google.maps.Map(
-          document.getElementById('map'),
-          { zoom: 17, center: { lat: lat, lng: lng }},
-        );
-
-        var marker = new google.maps.Marker({
-          icon: {
-            url: USER_MARKER_URL,
-            scaledSize: new google.maps.Size(20, 20),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(0, 50),
-          },
-          position: { lat: lat, lng: lng },
-          map: map
-        });
-      });
-    }
+    var marker = new google.maps.Marker({
+      icon: {
+        url: USER_MARKER_URL,
+        scaledSize: new google.maps.Size(20, 20),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 50),
+      },
+      position: { lat: lat, lng: lng },
+      map: this.google,
+    });
   }.bind(this);
 };
 

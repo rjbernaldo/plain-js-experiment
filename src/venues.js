@@ -1,12 +1,92 @@
-function Venues() {
+// TODO: dotenv
 
+function Venues() {
+  this.data = [];
 }
 
 Venues.prototype.render = function() {
   this.dom = document.createElement('div');
   this.dom.innerHTML = `
-    <div class='list-group'></div>
+    <div id='venues' class='list-group'></div>
   `;
 
   return this.dom;
+};
+
+Venues.prototype.setCurrentMarkerId = function(data) {
+  var lastCurrent = this.dom.getElementsByClassName('active')[0];
+  if (lastCurrent) {
+    lastCurrent.classList.remove('active');
+  }
+
+  var current = data ? document.getElementById(data.id) : null;
+  if (current) {
+    current.add('active');
+    current.scrollIntoViewIfNeeded();
+
+    this.data.forEach(function(d) {
+      d.marker.setIcon({
+        url: MARKER_URL,
+        scaledSize: new google.maps.Size(20, 20),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 50),
+      });
+    });
+
+    data.marker.setIcon({
+      url: CURRENT_MARKER_URL,
+      scaledSize: new google.maps.Size(20, 20),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(0, 50),
+    });
+  }
+};
+
+Venues.prototype.renderVenues = function() {
+  while (this.dom.hasChildNodes()) {
+    this.dom.removeChild(this.dom.lastChild);
+  }
+console.log(this.data);
+  this.data.forEach(function(d) {
+    var venue = new Venue(d);
+
+    this.dom.appendChild(venue.render(this.setCurrentMarkerId));
+
+    venue.dom.addEventListener('mouseover', function() {
+      this.setCurrentMarkerId(this.data);
+    }.bind(this));
+  }.bind(this));
+
+  this.setCurrentMarkerId();
+};
+
+Venues.prototype.fetchVenues = function(map, lat, lng, radius, limit) {
+  var foursquareUrl = `https://api.foursquare.com/v2/venues/search?intent=browse&ll=${lat},${lng}&radius=${radius}&limit=${limit}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERSION}`;
+
+  fetch(foursquareUrl)
+    .then(function(res) { return res.json(); })
+    .then(function(res) {
+      var venues = res.response.venues.map(function(venue) {
+        var marker = new google.maps.Marker({
+          icon: {
+            url: MARKER_URL,
+            scaledSize: new google.maps.Size(20, 20),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 50),
+          },
+          position: { lat: venue.location.lat, lng: venue.location.lng },
+          map: map.google,
+          title: venue.name,
+        });
+
+        marker.addListener('mouseover', function() {
+          console.log('setCurrentMarker', venue.id);
+        });
+
+        return Object.assign({}, venue, { marker: marker });
+      });
+
+      this.data = venues;
+      this.renderVenues();
+    }.bind(this));
 };

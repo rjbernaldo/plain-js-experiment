@@ -14,10 +14,10 @@ App.prototype.resize = function() {
   this.sidebar.dom.style.width = `${sidebarWidth}px`;
 };
 
-App.prototype.renderMap = function() {
+App.prototype.renderMap = function(lat, lng) {
   this.map = new Map();
   this.dom.appendChild(this.map.render());
-  this.map.attachGoogleMaps();
+  this.map.attachGoogleMaps(lat, lng);
 };
 
 App.prototype.renderSidebar = function() {
@@ -25,14 +25,21 @@ App.prototype.renderSidebar = function() {
   this.dom.appendChild(this.sidebar.render());
 };
 
-App.prototype.renderUserDetails = function() {
-  this.userDetails = new UserDetails();
+App.prototype.renderUserDetails = function(lat, lng) {
+  this.userDetails = new UserDetails(lat, lng); // todo: setparams
   this.sidebar.dom.appendChild(this.userDetails.render());
 };
 
-App.prototype.renderVenues = function() {
+App.prototype.renderVenues = function(lat, lng) {
   this.venues = new Venues();
   this.sidebar.dom.appendChild(this.venues.render());
+  this.venues.fetchVenues(
+    this.map,
+    lat,
+    lng,
+    this.userDetails.radius,
+    this.userDetails.limit,
+  );
 };
 
 App.prototype.attachEventListeners = function() {
@@ -42,12 +49,22 @@ App.prototype.attachEventListeners = function() {
 
 function initialize() {
   var app = new App();
-  app.renderMap();
-  app.renderSidebar();
-  app.renderUserDetails();
-  app.renderVenues();
-  app.attachEventListeners();
-  app.resize();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(p) {
+      var lat = p.coords.latitude;
+      var lng = p.coords.longitude;
+
+      app.renderMap(lat, lng);
+      app.renderSidebar();
+      app.renderUserDetails(lat, lng);
+      app.renderVenues(lat, lng);
+      app.attachEventListeners();
+      app.resize();
+    });
+  } else {
+    alert('Geolocation not available');
+  }
 }
 
 window.addEventListener('DOMContentLoaded', initialize, false);

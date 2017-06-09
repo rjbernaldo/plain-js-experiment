@@ -1,8 +1,8 @@
-function UserDetails(setParams) {
-  this.lat = 0;
-  this.lng = 0;
-  this.radius = 0;
-  this.limit = 0;
+function UserDetails(lat, lng, setParams) {
+  this.lat = lat;
+  this.lng = lng;
+  this.radius = 500;
+  this.limit = 50;
   this.setParams = setParams;
 }
 
@@ -10,7 +10,7 @@ UserDetails.prototype.render = function() {
   this.dom = document.createElement('div');
   this.dom.innerHTML = `
     <div class="list-group">
-        <div href="#" class='list-group-item list-group-item-success flex-column align-items-start' style='margin-bottom: 8px;' }}>
+        <div class='list-group-item list-group-item-success flex-column align-items-start' style='margin-bottom: 8px;' }}>
           <div class="d-flex w-100 justify-content-between" style='margin-bottom: 8px;' }}>
             <h5 class="mb-1">User Details</h5>
           </div>
