@@ -28,12 +28,24 @@ App.prototype.generateSidebar = function() {
   this.sidebar = document.createElement('div');
   this.sidebar.id = 'sidebar';
   this.sidebar.setAttribute('style', 'background-color: red; float: left; overflow-y: scroll; margin-left: 8px; padding-top: 8px; padding-bottom: 8px;');
+
+  this.userDetails = new UserDetails();
+  this.sidebar.appendChild(this.userDetails.render());
+
+  // var venues = new Venues();
+  // this.sidebar.appendChild(venues.render());
+
   this.app.appendChild(this.sidebar);
+};
+
+App.prototype.attachEventListeners = function() {
+  window.addEventListener('resize', app.resize, false);
+  this.userDetails.attachEventListeners();
 };
 
 function initialize() {
   var app = new App();
-  window.addEventListener('resize', app.resize.bind(app));
+  app.attachEventListeners();
 }
 
 window.addEventListener('DOMContentLoaded', initialize, false);
