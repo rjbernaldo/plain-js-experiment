@@ -17,6 +17,7 @@ App.prototype.resize = function() {
 App.prototype.renderMap = function() {
   this.map = new Map();
   this.dom.appendChild(this.map.render());
+  this.map.attachGoogleMaps();
 };
 
 App.prototype.renderSidebar = function() {
