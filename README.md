@@ -1,6 +1,6 @@
 # plain-js-experiment
 
-Small project to play around with different APIs using plain javascript. Essentially the vanilla js version of [foursquare-experiment](https://github.com/rjbernald/foursquare-experiment)
+Small project to play around with different APIs using plain javascript. Essentially the vanilla js version of [foursquare-experiment](https://github.com/rjbernaldo/foursquare-experiment)
 
 ## Project Specifications
 
