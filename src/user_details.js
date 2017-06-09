@@ -7,9 +7,8 @@ function UserDetails(setParams) {
 }
 
 UserDetails.prototype.render = function() {
-  var dom = document.createElement('div');
-
-  dom.innerHTML = `
+  this.dom = document.createElement('div');
+  this.dom.innerHTML = `
     <div class="list-group">
         <div href="#" class='list-group-item list-group-item-success flex-column align-items-start' style='margin-bottom: 8px;' }}>
           <div class="d-flex w-100 justify-content-between" style='margin-bottom: 8px;' }}>
@@ -78,7 +77,7 @@ UserDetails.prototype.render = function() {
       </div>
   `;
 
-  return dom;
+  return this.dom;
 };
 
 UserDetails.prototype.attachEventListeners = function() {
