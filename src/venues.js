@@ -21,7 +21,7 @@ Venues.prototype.setCurrentMarkerId = function(data) {
 
   var current = data ? document.getElementById(data.id) : null;
   if (current) {
-    current.add('active');
+    current.classList.add('active');
     current.scrollIntoViewIfNeeded();
 
     this.data.forEach(function(d) {
@@ -46,14 +46,14 @@ Venues.prototype.renderVenues = function() {
   while (this.dom.hasChildNodes()) {
     this.dom.removeChild(this.dom.lastChild);
   }
-console.log(this.data);
+
   this.data.forEach(function(d) {
     var venue = new Venue(d);
 
     this.dom.appendChild(venue.render(this.setCurrentMarkerId));
 
     venue.dom.addEventListener('mouseover', function() {
-      this.setCurrentMarkerId(this.data);
+      this.setCurrentMarkerId(d);
     }.bind(this));
   }.bind(this));
 
@@ -79,12 +79,14 @@ Venues.prototype.fetchVenues = function(map, lat, lng, radius, limit) {
           title: venue.name,
         });
 
-        marker.addListener('mouseover', function() {
-          console.log('setCurrentMarker', venue.id);
-        });
+        var newVenue = Object.assign({}, venue, { marker: marker });
 
-        return Object.assign({}, venue, { marker: marker });
-      });
+        marker.addListener('mouseover', function() {
+          this.setCurrentMarkerId(newVenue);
+        }.bind(this));
+
+        return newVenue;
+      }.bind(this));
 
       this.data = venues;
       this.renderVenues();

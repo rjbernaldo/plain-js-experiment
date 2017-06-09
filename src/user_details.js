@@ -14,13 +14,13 @@ UserDetails.prototype.render = function() {
           <div class="d-flex w-100 justify-content-between" style='margin-bottom: 8px;' }}>
             <h5 class="mb-1">User Details</h5>
           </div>
-          <div className="mb-1">
-            <div className="input-group">
-              <span className="input-group-addon" id="basic-addon1" style='width: 100px;'>Latitude</span>
+          <div class="mb-1">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1" style='width: 100px;'>Latitude</span>
               <input
                 id="latInput"
                 type="text"
-                className="form-control"
+                class="form-control"
                 placeholder="0"
                 aria-describedby="basic-addon1"
                 value='${this.lat}'
@@ -34,7 +34,7 @@ UserDetails.prototype.render = function() {
               <input
                 id="lngInput"
                 type="text"
-                className="form-control"
+                class="form-control"
                 placeholder="0"
                 aria-describedby="basic-addon2"
                 value='${this.lng}'
@@ -42,35 +42,35 @@ UserDetails.prototype.render = function() {
               />
             </div>
           </div>
-          <div className="mb-1">
-            <div className="input-group">
-              <span className="input-group-addon" id="basic-addon3" style='width: 100px;'>Radius</span>
+          <div class="mb-1">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon3" style='width: 100px;'>Radius</span>
               <input
                 id="radiusInput"
                 type="text"
-                className="form-control"
+                class="form-control"
                 aria-describedby="basic-addon3"
                 value='${this.radius}'
               />
             </div>
           </div>
-          <div className="mb-1">
-            <div className="input-group">
-              <span className="input-group-addon" id="basic-addon4" style='width: 100px;'>Limit</span>
+          <div class="mb-1">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon4" style='width: 100px;'>Limit</span>
               <input
                 id="limitInput"
                 type="text"
-                className="form-control"
+                class="form-control"
                 aria-describedby="basic-addon4"
                 value='${this.limit}'
               />
             </div>
           </div>
-          <div className="mb-1">
+          <div class="mb-1">
             <button
               id="submitBtn"
               type="button"
-              className="btn btn-primary"
+              class="btn btn-primary"
              >Change</button>
           </div>
         </div>
