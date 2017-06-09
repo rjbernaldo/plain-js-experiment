@@ -1,0 +1,22 @@
+{
+  "name": "plain-js-experiment",
+  "version": "1.0.0",
+  "description": "Small project to play around with different APIs using plain javascript.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjbernaldo/plain-js-experiment.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rjbernaldo/plain-js-experiment/issues"
+  },
+  "homepage": "https://github.com/rjbernaldo/plain-js-experiment#readme",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
+}
