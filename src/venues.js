@@ -1,7 +1,3 @@
-// TODO: dotenv
-var CLIENT_ID = 'D2RALMRPSNOPXON20GXYIHADRYDIOJCMZ45WXFP14LXLPW0M';
-var CLIENT_SECRET = '1XGQMVGAWCBDRFH3SLOCBSZMWQLKPSVWUSB1QQAP22Q1NIGX';
-var VERSION = '20170101';
 var MARKER_URL = '/assets/black.png';
 var CURRENT_MARKER_URL = '/assets/green.png';
 
@@ -62,7 +58,7 @@ Venues.prototype.renderVenues = function() {
 };
 
 Venues.prototype.fetchVenues = function(map, lat, lng, radius, limit) {
-  var foursquareUrl = `https://api.foursquare.com/v2/venues/search?intent=browse&ll=${lat},${lng}&radius=${radius}&limit=${limit}&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERSION}`;
+  var foursquareUrl = `https://api.foursquare.com/v2/venues/search?intent=browse&ll=${lat},${lng}&radius=${radius}&limit=${limit}&client_id=D2RALMRPSNOPXON20GXYIHADRYDIOJCMZ45WXFP14LXLPW0M&client_secret=1XGQMVGAWCBDRFH3SLOCBSZMWQLKPSVWUSB1QQAP22Q1NIGX&v=20170101`;
 
   fetch(foursquareUrl)
     .then(function(res) { return res.json(); })

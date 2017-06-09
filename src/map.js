@@ -1,4 +1,3 @@
-var API_KEY = 'AIzaSyChnDYKpSZIRZx5Suoj-kqHWq45v04haBM'; // TODO: dotenv
 var USER_MARKER_URL = '/assets/blue.png';
 
 function Map() {}
@@ -11,7 +10,7 @@ Map.prototype.render = function() {
 };
 
 Map.prototype.attachGoogleMaps = function(lat, lng) {
-  var googleMapsUrl = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`;
+  var googleMapsUrl = `https://maps.googleapis.com/maps/api/js?key=AIzaSyChnDYKpSZIRZx5Suoj-kqHWq45v04haBM&callback=initMap`;
   var script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
   script.setAttribute('src', googleMapsUrl);
